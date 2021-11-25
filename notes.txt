@@ -1,0 +1,256 @@
+class componentts and function components
+
+Component name must be capitalized and contain a return statement
+    For class compopntents, the return must be wrapped in a render() method
+    That return must contain a single react element. which can have other elements and components nextred inside it
+    Render a component like an HTML tagk, twith the firs tletter caiutalized typically self-closing tag but not always.
+
+Why use components  
+    resusable pieces of code much like function but with a specific purpose rendering different parts of the UI
+    compose interface in a modular way
+    similar to bootstrap components  check out reach component livbraries
+
+Props - short for properties, is very important
+
+Multiple componenets need access to the same read only data. Lift the state uup.
+
+
+
+Container Components
+  Fetch and manage stae data\
+  pass data to presentational components for rendering
+  do not render UI
+
+Presentational Components
+  render UI - styles, markup based on props apassed to them
+  do not maintain their own state other that what is being displayed..
+
+  fat vs skinny opr stateful vs stateless
+
+
+Functional Components
+    function Example(props) {...}
+
+    const Example = props => {...}
+
+    function Example(props) {     //do not require a render method around the return and never have a constructgor method
+      return <div>{props.someData}</div>;
+    }
+
+    Functio components dont use "this" the previous functional component written as class component
+    class Example extends Component {
+      render() {
+        return <div>{this.props.someDate}</div>;
+      }
+    }
+
+    cannot hold state
+    canot use lifecycle
+
+    Hooks- recently introduced to function components, can access state and lifecycle methods.
+
+
+    use a unique key attribute to elements renered as a list using the map functio.
+
+This Virtual DOM. 
+  not  unique to React
+  React maintains a lightweight representation of the browser DOM in memory
+  it is much faster and easier to update the cirtual DOM than the browser DO - no re-rendering of graphical display
+  any dom changers you make with react are first made to the virtual dom
+
+  react use a [process cal;led reconciliation to compare and fidn differences between ("diff") the Virtual DOM and the browser DOM
+  Reconcilation enginew named Fiber
+  Fiber 
+    looks fro whats changed then figures out the most optimized way to patch the browser DOM with the changes with minimal re-rendering
+    combining updates in batches instead of multiple single changes
+
+
+
+    USE <react.fragment> instead of a <div> to return a top level component/ elements. refer to jumbotron and navbar elements in HeaderComponent.js
+      <> is new if it doesnt work use the longhand <react.fragment> 
+    
+
+
+WEEK4
+  Computed Property Names and the spread syntax
+
+
+  Computed Property Namesallow y ou to pass in variables for use aas property namers when initializing an object
+  Declare a variable
+
+  const myProperty = 'foo';
+
+  const myObject = {
+    [myProperty]: "This is a test"
+  }
+
+  myObject
+
+
+Spread syntax
+      can be used with both arrays and objects
+      in both cases it alows yout to pullo out a copy of whats inside the array or object
+
+      combine two arrays
+      const waterVehicles = ["canoe", "sailboat", "submarine"}]
+      const landVehicles = ["sedan", "truck", "van"]
+
+      const vehicles = [...landVehicles, ...waterVehicles]
+
+      conts moreLandVehicles = [... landVehicles, "tank"]  //adds tank to landVehicles array
+      const mixNMatch = [...landVehicles, "banana", 3, 3, {_}, { someObjProperty: "someOjbectPrpValue"}, ...water Vehicles];
+
+      const objOne = { color: "blue", height: 12 };
+      const objTwo = { material: "ceramic", width: 6};
+      const objOneAndTwoCombined = { ...objOne, ...objTwo };
+
+      objOneAndTwoCombined
+      prints
+      {color: "blue", height: 12, material: "ceramic", width: 6}
+
+      if you try to combine two objects and they have shared Property such as color or height in the previous example, the second object that is passed over rides the parameter
+
+
+      also use to create an object from an existing object, while updating one or more property
+    const objOneUpdatedHeight = {...objOne, height: 300}
+
+Ternary Operator short cut for if statement
+  takes in 3 operands
+  condition ? expressionIfTruthy : expressionIfFalsy
+
+const lightswitch = {
+    switchState: "on",
+    flipSwitch() {
+        if (this.switchState === "on") {
+            this.switchState = "off";
+        } else {
+            this.switchState = "on";
+        }
+    }
+};
+or wwrite
+
+lightswitch.flipSwitch = function() {
+  (this.switchsState==="on") ? this.switchState = "off" : this.switchState = "on";
+}
+
+lightswitch.flipSwitch(); //turn switchState on or off
+
+
+
+
+function canVote(age) {
+    if (age >= 18) {
+        return true;
+    }
+    return false;
+}
+
+not like this
+
+
+// DOESNT WORK
+function canVote(age) {  
+  (age >= 18) ? return true : return false;
+}
+
+// WORKS like this
+function canVote(age ){
+  return (age >= 18) ? true : false;
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Games extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      games: GAMES
+    };
+  }
+  
+  render() {
+    const gamesList = this.state.games.map(game => {
+      return (
+        <li key={game.id}>
+          <RenderGame game={game} />
+        </li>
+      );
+    });    
+    
+    return (
+      <div>
+        <h2>Available Games</h2>
+        <ul>{gamesList}</ul>
+      </div>
+    );
+  }
+}
+
+function RenderGame(props) {
+  return (
+    <strong>Game ID {props.game.id}: {props.game.name}</strong>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+removed from app.css
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
